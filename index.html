@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>即時數據儀表板</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f4f6f9;
+            margin: 0;
+            padding: 30px 15px;
+            color: #333;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0 0 10px 0;
+            color: #1a252f;
+        }
+        .notice {
+            color: #666;
+            font-size: 0.95em;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        .card h3 {
+            margin-top: 0;
+            color: #2c3e50;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+        }
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>📊 即時監控數據儀表板</h1>
+        <p class="notice">💡 上班時間每小時自動更新 | 手動重新整理即可載入最新圖表</p>
+    </div>
+
+    <div class="grid-container">
+        <div class="card">
+            <h3>📈 圖表 1：即時趨勢總覽 (chart.png)</h3>
+            <img class="auto-refresh-img" src="chart.png" alt="chart.png">
+        </div>
+
+        <div class="card">
+            <h3>📉 圖表 2：詳細指標 A (chart1.png)</h3>
+            <img class="auto-refresh-img" src="chart1.png" alt="chart1.png">
+        </div>
+
+        <div class="card">
+            <h3>📊 圖表 3：詳細指標 B (chart2.png)</h3>
+            <img class="auto-refresh-img" src="chart2.png" alt="chart2.png">
+        </div>
+
+        <div class="card">
+            <h3>📋 圖表 4：詳細指標 C (chart3.png)</h3>
+            <img class="auto-refresh-img" src="chart3.png" alt="chart3.png">
+        </div>
+    </div>
+
+    <script>
+        // 自動防快取機制：在每個圖片 URL 後方加上當前時間戳記，避免瀏覽器顯示舊圖片
+        document.addEventListener("DOMContentLoaded", function() {
+            const timestamp = new Date().getTime();
+            const images = document.querySelectorAll('.auto-refresh-img');
+            images.forEach(img => {
+                const currentSrc = img.getAttribute('src');
+                img.src = currentSrc + '?v=' + timestamp;
+            });
+        });
+    </script>
+
+</body>
+</html>
