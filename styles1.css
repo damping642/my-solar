@@ -1,0 +1,72 @@
+/* Basic styling for the page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #007FAE; /* Light blue background */
+    margin: 10;
+    padding: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+h1 {
+    color: #ffffff; /* Teal heading color */
+    font-size: 45px;
+}
+img {
+    width: 100%;
+    border-radius: 20px;
+}		
+.container {
+    max-width: 100%;
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+/* Styling for the image */
+#energy-image {
+    display: flex;
+    /* 水平置中 */
+    justify-content: center;    
+    /* 垂直置中 */
+    align-items: center;
+    width: 25%;
+    height: auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+/* Styling for the energy chart */
+#energy-chart {
+    position: relative;
+    width: 72%;
+    height: 700px;
+    background-color: #ffffff; /* White chart background */
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+}
+/* Styling for the title */
+#energy-title {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    background-color: #002634;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;			
+}
+#energy-title2 {
+    width: 900px;
+    height: 150px;		
+}
+@media (max-width: 600px) {
+    /* Responsive layout for small screens */
+    #energy-image, #energy-chart, #energy-map {
+        width: 100%;
+    }
+}
