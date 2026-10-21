@@ -1,29 +1,27 @@
 name: Hourly Chart Updater
 
 on:
-schedule:
-    # 台灣時間 07:17 - 16:17 (對應 UTC 時間 23:17 及 00:17 - 08:17)
-    # 星期設定為 0-5，確保涵蓋台灣週一早上的 UTC 週日晚上
-    - cron: '17 23,0-8 * * 0-5'
-
-  workflow_dispatch: # 保留手動點擊觸發測試按鈕
+  schedule:
+    # 台灣時間週一至週五 09:00 - 18:00（對應 UTC 時間 01:00 - 10:00 每小時一次）
+    - cron: '0 1-10 * * 1-5'
+  workflow_dispatch: # 允許在網頁上記錄頁面手動點擊按鈕觸發測試
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 允許自動提交並更新檔案權限
+      contents: write # 開放自動寫入/更新 chart.png 的權限
 
     steps:
       - name: 1. 複製專案程式碼
         uses: actions/checkout@v4
 
-      - name: 2. 設定 Python 環境
+      - name: 2. 安裝 Python 環境
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: 3. 安裝必要套件
+      - name: 3. 安裝 Matplotlib 繪圖套件
         run: |
           python -m pip install --upgrade pip
           pip install matplotlib requests pandas
@@ -31,8 +29,8 @@ jobs:
       - name: 4. 執行繪圖腳本
         run: python main.py
 
-      - name: 5. 自動將產出的 PNG 圖表 Commit 並 Push 回專案
+      - name: 5. 自動將產出的 chart.png Commit 並 Push 回專案
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "Auto-update generated charts [skip ci]"
-          file_pattern: "*.png"   # 自動抓取資料夾內產出的所有 PNG 圖片
+          commit_message: "Auto-update generated chart [skip ci]"
+          file_pattern: "*.png"
